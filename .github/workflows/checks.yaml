@@ -12,7 +12,8 @@ jobs:
         echo "::set-output name=var_1::$(echo hello)"
         echo "::set-output name=var_2::$(echo world)"
     - id: set_2
-      run: echo "::set-output name=var_3::$(echo 1234)"
+      run: |
+        echo "::set-output name=var_3::$(echo 1234)"
     outputs:
       variable_1: ${{ steps.set_1.outputs.var_1 }}
       variable_2: ${{ steps.set_1.outputs.var_2 }}
@@ -26,3 +27,4 @@ jobs:
         run: |
           echo "${{ needs.set_vars.outputs.variable_1 }}" # Gets printed
           echo "${{ needs.set_vars.outputs.variable_2 }}" # As well
+          echo "${{ needs.set_vars.outputs.variable_3 }}" # Empty space in logs, variable not resolved
